@@ -18,6 +18,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import com.squadthree.fundtransfer.constant.AppConstant;
 
+import com.squadthree.fundtransfer.dto.TransactionResponseDto;
+
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	/**
@@ -51,6 +53,100 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	}
 	
 	
+	/**
+	 * This method will handle account Not present exception
+	 * 
+	 * @param exeception
+	 * @return TransactionResponseDto
+	 */
+	@ExceptionHandler(AccountNotFoundException.class)
+	public ResponseEntity<TransactionResponseDto> accountNotFoundException(AccountNotFoundException exeception ) {
+		
+		TransactionResponseDto  TransactionResponseDto = new TransactionResponseDto();
+		TransactionResponseDto.setResponseMessage(AppConstant.ACCOUNT_NOT_FOUND_MESSAGE);
+		TransactionResponseDto.setStatusCode(HttpStatus.NOT_FOUND.value());
+		
+		return new ResponseEntity<>(TransactionResponseDto, HttpStatus.NOT_FOUND);
+	}
+	
+	
+	/**
+	 * This will handle the insufficient balance check
+	 * @param exeception
+	 * @return TransactionResponseDto
+	 */
 
+	@ExceptionHandler(InsufficientBalanceException.class)
+	public ResponseEntity<TransactionResponseDto> InsufficientBalanceException(InsufficientBalanceException exeception ) {
+		
+		TransactionResponseDto  TransactionResponseDto = new TransactionResponseDto();
+		TransactionResponseDto.setResponseMessage(AppConstant.INSUFFICIENT_BALANCE);
+		TransactionResponseDto.setStatusCode(HttpStatus.NOT_ACCEPTABLE.value());
+		
+		return new ResponseEntity<>(TransactionResponseDto , HttpStatus.NOT_ACCEPTABLE);
+	}
+	
+
+	/**
+	 * This method will handle maximum limit transaction exception
+	 * @param exeception
+	 * @return TransactionResponseDto
+	 */
+	@ExceptionHandler(MaximumLimitTransaction.class)
+	public ResponseEntity<TransactionResponseDto> MaximumLimitTransaction(MaximumLimitTransaction exeception) {
+		
+		TransactionResponseDto  TransactionResponseDto = new TransactionResponseDto();
+		TransactionResponseDto.setResponseMessage(AppConstant.LIMIT_CROSSED);
+		TransactionResponseDto.setStatusCode(HttpStatus.NOT_ACCEPTABLE.value());
+		
+		return new ResponseEntity<>(TransactionResponseDto, HttpStatus.NOT_ACCEPTABLE);
+	}
+	
+	
+	/**
+	 * This method will handle minimum balance exception
+	 * @param exeception
+	 * @return TransactionResponseDto
+	 */
+	@ExceptionHandler(MinimumBalanceException.class)
+	public ResponseEntity<TransactionResponseDto> MinimumBalanceException(MinimumBalanceException exeception) {
+		
+		TransactionResponseDto  TransactionResponseDto = new TransactionResponseDto();
+		TransactionResponseDto.setResponseMessage( AppConstant.MINIMUM_BALANCE);
+		TransactionResponseDto.setStatusCode(HttpStatus.NOT_ACCEPTABLE.value());
+		
+		return new ResponseEntity<>(TransactionResponseDto, HttpStatus.NOT_FOUND);
+	}
+
+	
+	/**
+	 * This method will handle beneficiary not found exception
+	 * @param exeception
+	 * @return TransactionResponseDto
+	 */
+	@ExceptionHandler(BeneficiaryNotFoundException.class)
+	public ResponseEntity<TransactionResponseDto> BeneficiaryNotFoundException(BeneficiaryNotFoundException exeception) {
+		
+		TransactionResponseDto  TransactionResponseDto = new TransactionResponseDto();
+		TransactionResponseDto.setResponseMessage( AppConstant.BENEFICIARY_NOT_FOUND);
+		TransactionResponseDto.setStatusCode(HttpStatus.NOT_ACCEPTABLE.value());
+		
+		return new ResponseEntity<>(TransactionResponseDto, HttpStatus.NOT_FOUND);
+	}
+
+	/**
+	 * This method will handle invalid transaction exception
+	 * @param exeception
+	 * @return TransactionResponseDto
+	 */
+	@ExceptionHandler(InvalidTransactionException.class)
+	public ResponseEntity<TransactionResponseDto> InvalidTransactionException(InvalidTransactionException exeception) {
+		
+		TransactionResponseDto  TransactionResponseDto = new TransactionResponseDto();
+		TransactionResponseDto.setResponseMessage( AppConstant.BENEFICIARY_NOT_FOUND);
+		TransactionResponseDto.setStatusCode(HttpStatus.NOT_ACCEPTABLE.value());
+		
+		return new ResponseEntity<>(TransactionResponseDto, HttpStatus.NOT_FOUND);
+	}
 
 }
