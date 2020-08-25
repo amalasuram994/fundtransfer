@@ -55,13 +55,13 @@ public class AccountServiceImpl implements AccountService {
 			if (accountSummaryDtoList.isEmpty()) {
 
 				logger.info(AppConstant.ACCOUNT_NOT_FOUND_MESSAGE);
-				throw new AccountNotFoundException();
+				throw new AccountNotFoundException(AppConstant.ACCOUNT_NOT_FOUND_MESSAGE);
 
 			}
 
 		} else {
 			logger.info(AppConstant.CUSTOMER_NOT_FOUND_MESSAGE);
-			throw new CustomerNotFoundException(customerId);
+			throw new CustomerNotFoundException(AppConstant.CUSTOMER_NOT_FOUND);
 		}
 
 		return accountSummaryResponseDto;
@@ -93,7 +93,7 @@ public class AccountServiceImpl implements AccountService {
 		} else {
 
 			logger.info(AppConstant.ACCOUNT_NOT_FOUND_MESSAGE);
-			throw new AccountNotFoundException();
+			throw new AccountNotFoundException(AppConstant.ACCOUNT_NOT_FOUND_MESSAGE);
 		}
 	}
 

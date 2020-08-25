@@ -12,8 +12,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import com.squadthree.fundtransfer.constant.AppConstant;
 
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
@@ -39,7 +42,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<>(body, headers, status);
 	}
 
-
+	@ExceptionHandler(CustomerNotFoundException.class)
+	public ResponseEntity<Object> customerNotFoundException(CustomerNotFoundException ex, WebRequest request) {
+		Map<String, Object> body = new LinkedHashMap<>();
+		body.put(AppConstant.STATUS_CODE, AppConstant.STATUS_CODE_VALUE);
+		body.put(AppConstant.STATUS_MESSAGE, AppConstant.CUSTOMER_NOT_FOUND);
+		return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+	}
+	
+	
 
 
 }
