@@ -104,9 +104,7 @@ public class TransactionServiceImpl implements TransactionService {
 		List<Transaction> transactions = transactionRepository
 				.findByFromAccountNumber(transactionDto.getFromAccountNumber());
 		List<Double> transactionAmounts = new ArrayList();
-		transactions.forEach(e -> {
-			transactionAmounts.add(e.getAmount());
-		});
+		transactions.forEach(e -> transactionAmounts.add(e.getAmount()));
 		
 		Optional<Double> totalTransactionDone = transactionAmounts.stream().reduce((a, b) -> a + b);
 

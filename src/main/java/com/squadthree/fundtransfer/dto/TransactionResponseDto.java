@@ -3,7 +3,6 @@ package com.squadthree.fundtransfer.dto;
 public class TransactionResponseDto {
 	private String responseMessage;
 	private int statusCode;
-	//private String statusMessage;
 
 	public String getResponseMessage() {
 		return responseMessage;

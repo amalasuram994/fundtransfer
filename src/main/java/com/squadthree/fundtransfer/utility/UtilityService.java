@@ -2,9 +2,8 @@ package com.squadthree.fundtransfer.utility;
 
 import org.springframework.beans.BeanUtils;
 
-import com.squadthree.fundtransfer.constant.AppConstant;
-import com.squadthree.fundtransfer.dto.TransactionResponseDto;
 import com.squadthree.fundtransfer.dto.TransactionDto;
+import com.squadthree.fundtransfer.dto.TransactionResponseDto;
 import com.squadthree.fundtransfer.entity.Transaction;
 
 

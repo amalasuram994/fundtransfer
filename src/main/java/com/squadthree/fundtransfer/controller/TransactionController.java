@@ -14,7 +14,12 @@ import org.springframework.http.HttpStatus;
 import com.squadthree.fundtransfer.dto.TransactionResponseDto;
 import com.squadthree.fundtransfer.dto.TransactionDto;
 import com.squadthree.fundtransfer.service.TransactionService;
-
+/**
+ * 
+ * 
+ * @author shraddha
+ *
+ */
 @RestController
 @RequestMapping("/transactions")
 public class TransactionController {
@@ -33,8 +38,8 @@ public class TransactionController {
 	@PostMapping("")
 	public ResponseEntity<TransactionResponseDto> transaction( @RequestBody TransactionDto transactionDto) {
 		
-		TransactionResponseDto TransactionResponseDto = transactionService.transaction(transactionDto);
+		TransactionResponseDto transactionResponseDto = transactionService.transaction(transactionDto);
 		logger.info("transaction controller");
-		return new ResponseEntity<>(TransactionResponseDto, HttpStatus.OK);
+		return new ResponseEntity<>(transactionResponseDto, HttpStatus.OK);
 	}
 }
