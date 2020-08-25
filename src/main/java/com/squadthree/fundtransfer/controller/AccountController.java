@@ -33,7 +33,7 @@ private static Logger logger = LoggerFactory.getLogger(AccountController.class);
 	 * @throws CustomerNotFoundException 
 	 */
 
-	@GetMapping("/summary")	
+	@GetMapping("/summary/{customerId}")	
 	public ResponseEntity<AccountSummaryResponseDto> getAccountSummary(@PathVariable Integer customerId) throws CustomerNotFoundException{
 		
 		  AccountSummaryResponseDto accountSummaryResponseDto = accountService.findAccountSummary(customerId);
@@ -49,7 +49,7 @@ private static Logger logger = LoggerFactory.getLogger(AccountController.class);
 	 * @return AccountDetailDto
 	 */
 	
-	@GetMapping("/details")
+	@GetMapping("/details/{accountId}")
 	public ResponseEntity<AccountDetailDto> getAccountDetail(@PathVariable Integer accountId){
 		
 		AccountDetailDto accountDetailDto = accountService.getAccountDetail(accountId);
