@@ -68,7 +68,7 @@ public class TransactionServiceImpl implements TransactionService {
 			accountData = account.get();
 			if (destinationAccountoptional.isPresent()) {
 				
-				//if(!accountData.getAccountNumber().equals(destinationAccountoptional.get().getAccountNumber())){
+				
 				
 					List<Beneficiary> beneficiaries = beneficiaryRepository.findByAccountId(accountData.getAccountId());
 					
@@ -94,10 +94,7 @@ public class TransactionServiceImpl implements TransactionService {
 						
 						throw new BeneficiaryNotFoundException(accountData.getAccountId());
 					}
-					/*}
-			else {
-					 throw new InvalidTransactionException(AppConstant.INVALID_TRANSACTION);
-				}*/
+				
 			}
 			
 		} else {
@@ -136,8 +133,9 @@ public class TransactionServiceImpl implements TransactionService {
 		destinationTransaction.setFromAccountNumber(transactionDto.getToAccountNumber());
 		destinationTransaction.setToAccountNumber(transactionDto.getFromAccountNumber());
 		destinationTransaction.setTransactionDate(new Date(System.currentTimeMillis()));
-		
-		BeanUtils.copyProperties(transactionDto, destinationTransaction);
+		destinationTransaction.setDescription(transactionDto.getDescription());
+		destinationTransaction.setAmount(transactionDto.getAmount());
+		//BeanUtils.copyProperties(transactionDto, destinationTransaction);
 		transactionRepository.save(destinationTransaction);
 
 		return UtilityService.responseDto(AppConstant.ACCOUNT_DEBITED);

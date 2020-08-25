@@ -29,8 +29,6 @@ import junit.framework.Assert;
 @RunWith(MockitoJUnitRunner.Silent.class)
 	public class TransactionServiceImplTest {
 	
-	
-	   
 		@InjectMocks
 		TransactionServiceImpl transactionServiceImpl;
 	
@@ -44,7 +42,6 @@ import junit.framework.Assert;
 		BeneficiaryRepository beneficiaryRepository;
 	
 		
-		@Ignore
 		@Test
 		public void testTransaction() {
 			
@@ -53,13 +50,7 @@ import junit.framework.Assert;
 	    transactionDto.setDescription("Test");
 	    transactionDto.setAmount(10000.0);
 	    transactionDto.setToAccountNumber((long) 2);
-	
-	
-	    Transaction transaction = new Transaction();
-	    transaction.setFromAccountNumber((long) 1);
-	    transaction.setAmount(10000.0);
-	    transaction.setToAccountNumber((long) 2);
-	    transaction.setDescription("Test");
+	  
 	
 	
 	    Account fromAccount = new Account();
@@ -92,17 +83,24 @@ import junit.framework.Assert;
 	    transactions.add(transactiondet);
 	    
 	  
-	    Mockito.when(accountRepository.findByAccountNumber((long) 88888)).thenReturn(Optional.of(fromAccount));
+	    Mockito.when(accountRepository.findByAccountNumber(Mockito.anyLong())).thenReturn(Optional.of(fromAccount));
 	    
 	    Mockito.when(beneficiaryRepository.findByAccountId(1)).thenReturn(beneficiaries);
 	    
-	    Mockito.when(accountRepository.save(toAccount)).thenReturn(toAccount);
+	    Mockito.when(accountRepository.save(fromAccount)).thenReturn(fromAccount);
 	    Mockito.when(transactionRepository.findByFromAccountNumber(Mockito.anyLong())).thenReturn(transactions);
-	    Mockito.when(transactionRepository.save(transaction)).thenReturn(transaction);
+	    Mockito.when(transactionRepository.save(transactiondet)).thenReturn(transactiondet);
 	    
-	   // Mockito.when(accountRepository.findById(2)).thenReturn(Optional.of(account2));
 	    TransactionResponseDto transactionResponse = transactionServiceImpl.transaction(transactionDto);
 	    Assert.assertNotNull(transactionResponse);
+	    
+	    
+	    
+	    
+
+
+	  
+	    
 	}
 
 }
